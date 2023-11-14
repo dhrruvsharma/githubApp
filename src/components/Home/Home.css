@@ -1,0 +1,95 @@
+*{
+    background: black;
+    color: white;
+}
+.search-form{
+    background-color: white;
+    padding: 1rem;
+    border-radius: 10%;
+    height: 10rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: papayawhip;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+h2 {
+    font-size: 2.5rem;
+    background-color: white;
+    color: red;
+}
+.search-form form{
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    background-color: white;
+}
+.search-form input{
+    width: 75%;
+    font-size: 1.5rem;
+    background-color: white;
+    color: #333;
+}
+.search-form input,.search-form button{
+    outline: none;
+    padding: 1rem;
+}
+.search-form button{
+    background-color: #0b7ae8;
+    cursor: pointer;
+    height: auto;
+    font-size: 1.5rem;
+}
+.search-results{
+    background-color: black;
+    padding: 1.5rem 0;
+}
+.user{
+    color: white;
+    margin: 1rem;
+    display: flex;
+    flex-direction: row;
+    padding: 1rem;
+    align-items: center;
+    border-bottom: 2px solid white;
+}
+.user .img{
+    width: 40%;
+}
+.user .image img{
+    width: 100%;
+    border-radius: 10%;
+    height: 10rem;
+}
+.user-info *{
+    display: block;
+    padding: .7rem;
+}
+.more-options{
+    font-size: 1.4rem;
+    display: flex;
+    justify-content: space-between;
+}
+.more-options select, .pagination button{
+    outline: 1px solid white;
+    padding: .4rem;
+    border-radius: .3rem;
+    border: none;
+    font-size: 1rem;
+    margin: .5rem;
+}
+.pagination button{
+    cursor: pointer;
+    background-color: #333;
+    color: #fff;
+    margin: 0 2px;
+}
+a{
+    color: greenyellow
+}
