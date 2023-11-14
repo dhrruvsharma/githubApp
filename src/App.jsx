@@ -1,5 +1,5 @@
 import './index.css';
-import Home from "./components/home/home";
+import Home from "./components/Home/Home";
 import {BrowserRouter,Routes,Route} from "react-router-dom";
 import Users from "./components/Users/Users"
 function App() {
