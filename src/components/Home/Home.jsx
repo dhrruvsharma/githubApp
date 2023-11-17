@@ -4,7 +4,10 @@ import { useEffect } from "react";
 import "./Home.css";
 import User from "../ui/user";
 import axios from "axios";
+import LoadingScreen from "../ui/Loader";
 const Home = () => {
+
+    const [load,setLoad]= useState(false);
     const [query, setQuery] = useState("");
     const handlQueryInput = (e) => {
         const value = e.target.value;
@@ -40,7 +43,7 @@ const Home = () => {
     useEffect(() => {
         const displayUsersOnChange = async () => {
             if (query) {
-                const items = await fetchUsers();
+                const items = await fetchUsers();   
                 setUsers(items);
             }
         }
@@ -64,9 +67,12 @@ const Home = () => {
     
     const handleSearchUsers = async (e) => {
         e.preventDefault();
+        
         if (query) {
+            setLoad(true);
             const items = await fetchUsers();
             setUsers(items);
+            setLoad(false);
         }
         else {
             console.log("Your query is empty...");
@@ -107,6 +113,9 @@ const Home = () => {
                 ) : (
                     <h2>There is nothing to display...</h2>
                 )}
+            </div>
+            <div>
+                {load ? <LoadingScreen /> : null}
             </div>
         </div>
     )
