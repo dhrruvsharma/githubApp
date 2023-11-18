@@ -64,7 +64,7 @@ const Users = () => {
                     setEl(i);
                 }
             }
-            console.log(el);
+            
         }
         most();
     }, [])
@@ -87,7 +87,9 @@ const Users = () => {
                         {userInfo?.location && <p>
                             {userInfo?.location}
                         </p>}
-                        <p>The language most used by the user is : {el}</p>
+                        {el ? (
+                            <p>The most used language by the user is : {el}</p>
+                        ): null}
                         {userInfo.blog && <p>
                             Website : <a href={userInfo?.blog}>{userInfo?.blog}</a>
                         </p>}
