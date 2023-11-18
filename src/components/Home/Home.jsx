@@ -5,13 +5,18 @@ import "./Home.css";
 import User from "../ui/user";
 import axios from "axios";
 import LoadingScreen from "../ui/Loader";
+import useDebounce from "../../useDebounce";
 const Home = () => {
 
+    const debouncedSearchValue = useDebounce()
+    
     const [load,setLoad]= useState(false);
     const [query, setQuery] = useState("");
+    const [display,setDisplay] = useState(true);
     const handlQueryInput = (e) => {
         const value = e.target.value;
         setQuery(value);
+        handleSearchUsers();
     }
     //Users fetched from the API
     const [users, setUsers] = useState([]);
@@ -65,11 +70,12 @@ const Home = () => {
         }
     }
     
-    const handleSearchUsers = async (e) => {
-        e.preventDefault();
+    const handleSearchUsers = async () => {
+        // e.preventDefault();
         
         if (query) {
             setLoad(true);
+            setDisplay(false);
             const items = await fetchUsers();
             setUsers(items);
             setLoad(false);
@@ -80,6 +86,7 @@ const Home = () => {
     }
     return (
         <div className="container">
+
             <div className="search-form">
                 <h2>Github Search User</h2>
                 <form>

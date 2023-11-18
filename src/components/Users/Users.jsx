@@ -5,6 +5,8 @@ import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
 import Repo from "../ui/repos"
+import Followers from "../Followers/Followers";
+import { Link } from "react-router-dom";
 const Users = () => {
     const { login } = useParams();
 
@@ -45,7 +47,8 @@ const Users = () => {
                         {userInfo?.bio}
                     </p>
                     <div className="more-data">
-                        {userInfo?.followers} Followers {userInfo?.following} Following
+                        <Link to = {`/user/${login}/followers`}>{userInfo?.followers} Followers </Link> 
+                        {userInfo?.following} Following
                         {userInfo?.location && <p>
                             {userInfo?.location}
                         </p>}
