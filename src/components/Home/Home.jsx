@@ -10,7 +10,7 @@ const Home = () => {
     let value = "";
     const [load,setLoad]= useState(false);
     const [query, setQuery] = useState("");
-    const handlQueryInput = (e) => {
+    const handlQueryInput = (e) => {    
         value = e.target.value;
         // console.log(value);
         setQuery(value);
@@ -18,7 +18,7 @@ const Home = () => {
     }
     useEffect(() => {
         const id = setTimeout(() => {
-            handleSearchUsers();
+            search();
         },1000)
         return () => {
             clearTimeout(id)
@@ -76,12 +76,23 @@ const Home = () => {
         }
     }
     
-    const handleSearchUsers = async () => {
-        // e.preventDefault();
-        
+    const handleSearchUsers = async (e) => {
+        e.preventDefault();
         if (query) {
             setLoad(true);
-            console.log(query)
+            // console.log(query)
+            const items = await fetchUsers();
+            setUsers(items);
+            setLoad(false);
+        }
+        else {
+            console.log("Your query is empty...");
+        }
+    }
+    const search = async () => {
+        if (query) {
+            setLoad(true);
+            // console.log(query)
             const items = await fetchUsers();
             setUsers(items);
             setLoad(false);
@@ -92,7 +103,6 @@ const Home = () => {
     }
     return (
         <div className="container">
-
             <div className="search-form">
                 <h2>Github Search User</h2>
                 <form>
