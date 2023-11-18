@@ -15,6 +15,8 @@ const Users = () => {
     //User repos
     const [repos, setRepos] = useState([]);
 
+    const [el,setEl] = useState("");
+    
     useEffect(() => {
         const fetchUserInformation = async () => {
             const URL = "https://api.github.com";
@@ -25,14 +27,47 @@ const Users = () => {
                 ]);
                 setUserInfo(response[0].data);
                 setRepos(response[1].data);
+                // console.log(response[1].data);
+                return response[1].data;
             }
             catch (error) {
                 console.error(error);
             }
         };
-        fetchUserInformation();
+        // fetchUserInformation();
+        let language = [];
+        let obj = {};
+        const most = async () => {
+            const data = await fetchUserInformation();
+            // console.log(data);
+            data.map((d) => {
+                language.push(d.language)
+            })
+            // console.log(language);
+            for (let i = 0;i < language.length;i++){
+                if (language[i] === null){
+                    continue;
+                }
+                if (!obj[language[i]]){
+                    obj[language[i]] = 1;
+                }
+                else {
+                    obj[language[i]]++;
+                }
+            }
+            // console.log(obj);
+            let max = 0;
+            
+            for (const i in obj){
+                if (max < obj[i]){
+                    max = obj[i];
+                    setEl(i);
+                }
+            }
+            console.log(el);
+        }
+        most();
     }, [])
-
     return (
         <div className="container">
             <a href="/" className="back">Back</a>
@@ -52,6 +87,7 @@ const Users = () => {
                         {userInfo?.location && <p>
                             {userInfo?.location}
                         </p>}
+                        <p>The language most used by the user is : {el}</p>
                         {userInfo.blog && <p>
                             Website : <a href={userInfo?.blog}>{userInfo?.blog}</a>
                         </p>}
