@@ -18,7 +18,9 @@ const Home = () => {
     }
     useEffect(() => {
         const id = setTimeout(() => {
-            search();
+            if (query){
+                search();
+            } 
         },1000)
         return () => {
             clearTimeout(id)
