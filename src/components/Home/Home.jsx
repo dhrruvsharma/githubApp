@@ -10,7 +10,6 @@ const Home = () => {
     let value = "";
     const [load,setLoad]= useState(false);
     const [query, setQuery] = useState("");
-    const [debouncedValue,setDebouncedValue] = useState('');
     const handlQueryInput = (e) => {
         value = e.target.value;
         // console.log(value);
@@ -19,9 +18,7 @@ const Home = () => {
     }
     useEffect(() => {
         const id = setTimeout(() => {
-            setDebouncedValue(query);
             handleSearchUsers();
-            console.log(debouncedValue);
         },1000)
         return () => {
             clearTimeout(id)
@@ -84,6 +81,7 @@ const Home = () => {
         
         if (query) {
             setLoad(true);
+            console.log(query)
             const items = await fetchUsers();
             setUsers(items);
             setLoad(false);
