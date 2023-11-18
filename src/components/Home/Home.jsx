@@ -5,19 +5,28 @@ import "./Home.css";
 import User from "../ui/user";
 import axios from "axios";
 import LoadingScreen from "../ui/Loader";
-import useDebounce from "../../useDebounce";
-const Home = () => {
 
-    const debouncedSearchValue = useDebounce()
-    
+const Home = () => {
+    let value = "";
     const [load,setLoad]= useState(false);
     const [query, setQuery] = useState("");
-    const [display,setDisplay] = useState(true);
+    const [debouncedValue,setDebouncedValue] = useState('');
     const handlQueryInput = (e) => {
-        const value = e.target.value;
+        value = e.target.value;
+        // console.log(value);
         setQuery(value);
-        handleSearchUsers();
+        // handleSearchUsers();
     }
+    useEffect(() => {
+        const id = setTimeout(() => {
+            setDebouncedValue(query);
+            handleSearchUsers();
+            console.log(debouncedValue);
+        },1000)
+        return () => {
+            clearTimeout(id)
+        }
+    },[query])
     //Users fetched from the API
     const [users, setUsers] = useState([]);
     //Page
@@ -75,7 +84,6 @@ const Home = () => {
         
         if (query) {
             setLoad(true);
-            setDisplay(false);
             const items = await fetchUsers();
             setUsers(items);
             setLoad(false);
@@ -90,7 +98,7 @@ const Home = () => {
             <div className="search-form">
                 <h2>Github Search User</h2>
                 <form>
-                    <input value={query} onChange={handlQueryInput} type="text" name="" id="" />
+                    <input onChange={handlQueryInput} type="text" name="" id="" />
                     <button onClick={handleSearchUsers}>Search</button>
                 </form>
             </div>
